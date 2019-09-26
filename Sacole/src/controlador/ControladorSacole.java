@@ -47,7 +47,7 @@ public class ControladorSacole {
         objeto.setCodigo(Integer.parseInt(man.jtfCodigo.getText()));
         objeto.setNumeroserie(Integer.parseInt(man.jtfNumeroserie.getText()));
         objeto.setPreco(Double.parseDouble(man.jtfPreco.getText()));
-        
+        objeto.setDatavalidade(LocalDate.parse("11/01/1988", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         objeto.setSabor(man.jtfSabor.getText());
         
         boolean resultado = DaoSacole.alterar(objeto);
