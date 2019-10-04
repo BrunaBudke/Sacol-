@@ -99,7 +99,7 @@ public class DaoSacole {
                 objeto.setCodigo(rs.getInt("codigo"));
                 objeto.setNumeroserie(rs.getInt("numeroserie"));
                 objeto.setPreco(rs.getDouble("preco"));
-                objeto.setDatavalidade(LocalDate.parse("11/01/1988", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                objeto.setDatavalidade(rs.getDate("datavalidade").toLocalDate());
                 objeto.setSabor(rs.getString("sabor"));
                 
                 
@@ -127,7 +127,7 @@ public class DaoSacole {
                 objeto.setCodigo(rs.getInt("codigo"));
                 objeto.setNumeroserie(rs.getInt("numeroserie"));
                 objeto.setPreco(rs.getDouble("preco"));
-                objeto.setDatavalidade(LocalDate.parse("11/01/1988", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                objeto.setDatavalidade(rs.getDate("datavalidade").toLocalDate());
                 objeto.setSabor(rs.getString("sabor"));
                 return objeto;//não mexa nesse, ele adiciona o objeto na lista
             }

@@ -47,12 +47,17 @@ public class ControladorSacole {
         objeto.setCodigo(Integer.parseInt(man.jtfCodigo.getText()));
         objeto.setNumeroserie(Integer.parseInt(man.jtfNumeroserie.getText()));
         objeto.setPreco(Double.parseDouble(man.jtfPreco.getText()));
-        objeto.setDatavalidade(LocalDate.parse("11/01/1988", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        objeto.setDatavalidade(LocalDate.parse(man.jtfDatavalidade.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         objeto.setSabor(man.jtfSabor.getText());
         
         boolean resultado = DaoSacole.alterar(objeto);
         if (resultado) {
             JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
+            if (man.listagem != null) {
+     atualizarTabela(man.listagem.tabela); //atualizar a tabela da listagem
+}
+
+man.dispose();//fechar a tela da manutenção
         } else {
             JOptionPane.showMessageDialog(null, "Erro!");
         }
@@ -65,6 +70,10 @@ public class ControladorSacole {
         boolean resultado = DaoSacole.excluir(objeto);
         if (resultado) {
             JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
+            if (man.listagem != null) {
+     atualizarTabela(man.listagem.tabela); //atualizar a tabela da listagem
+}
+man.dispose();//fechar a tela da manutenção
         } else {
             JOptionPane.showMessageDialog(null, "Erro!");
         }
@@ -85,7 +94,7 @@ public class ControladorSacole {
             linha.add(objeto.getCodigo());
             linha.add(objeto.getNumeroserie());
             linha.add(objeto.getPreco());
-            linha.add(objeto.getDatavalidade());
+            linha.add(objeto.getDatavalidade().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             linha.add(objeto.getSabor());
             modelo.addRow(linha); //adicionando a linha na tabela
         }
@@ -96,10 +105,13 @@ public class ControladorSacole {
         Sacole objeto = DaoSacole.consultar(pk);
         //Definindo os valores do campo na tela (um para cada atributo/campo)
         man.jtfCodigo.setText(objeto.getCodigo().toString());
-        man.jtfNumeroserie.setText(objeto.getNumeroserie());
-        
-        
+        man.jtfNumeroserie.setText(objeto.getNumeroserie().toString());
+        man.jtfPreco.setText(objeto.getPreco().toString());
+        man.jtfDatavalidade.setText(objeto.getDatavalidade().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         man.jtfSabor.setText(objeto.getSabor());
+        
+        
+        
         
         man.jtfCodigo.setEnabled(false); //desabilitando o campo código
         man.btnAdicionar.setEnabled(false); //desabilitando o botão adicionar
